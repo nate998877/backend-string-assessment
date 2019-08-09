@@ -1,3 +1,4 @@
+import re
 #!/usr/bin/env python
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
@@ -18,8 +19,9 @@
 
 
 def verbing(s):
-    """Your code goes here.  Edit this docstring."""
-    return
+    if len(s) > 2:
+        s += "ly" if s[-3:] == 'ing' else "ing"
+    return s
 
 
 # E. not_bad
@@ -31,8 +33,10 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-    """Your code goes here.  Edit this docstring."""
-    return
+    foo = re.findall(r"not+.+bad", s)
+    for n in foo:
+        s = s.replace(n, 'good')
+    return s
 
 
 # F. front_back
@@ -43,8 +47,7 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-    """Your code goes here.  Edit this docstring."""
-    return
+    return a[:(len(a)-len(a)//2)] + b[:(len(b)-len(b)//2)] + a[(len(a)-len(a)//2):] + b[(len(b)-len(b)//2):]
 
 
 # Provided simple test() function used in main() to print
